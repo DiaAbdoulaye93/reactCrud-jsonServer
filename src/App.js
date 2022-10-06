@@ -1,7 +1,7 @@
 import './App.css';
 import React, { Component } from 'react';
 import AddStudent from './add-student';
-import { environment , deleteUser} from './.env';
+import { environment , deleteUser, addStudent} from './.env';
 
 
 
@@ -31,27 +31,9 @@ class App extends Component {
    
   }
 
-  // state = {
-  //   Students: [
-  //     { id: 1, nom: "Dia", prenom: "Abdoulaye", sex: "M", telephone: "771970777", niveau: "licence 1", montant: 25000 },
-  //     { id: 2, nom: "Diallo", prenom: "Saliou", sex: "M", telephone: "771970777", niveau: "licence 3", montant: 25000 },
-  //     { id: 3, nom: "Camara", prenom: "Mamoudou", sex: "M", telephone: "771970777", niveau: "Master 1", montant: 50000 },
-  //     { id: 4, nom: "Sow", prenom: "Hady", sex: "F", telephone: "771970777", niveau: "licence 1", montant: 25000 },
-  //     { id: 5, nom: "Sall", prenom: "Hamidou", sex: "M", telephone: "771970777", niveau: "licence 2", montant: 25000 },
-  //     { id: 6, nom: "Diaw", prenom: "Oumy", sex: "F", telephone: "771970777", niveau: "Master 1", montant: 50000 },
-  //   ]
-  // };
-  handleDelete = id => {
-    const students = this.state.Students.slice();
-    const index = students.findIndex(student => student.id === id);
-    students.splice(index, 1);
-    this.setState({ Students: students });
-  }
   handleAdd = student => {
-    const students = [...this.state.Students]
-    students.push(student);
-    console.log(students);
-    this.setState({ Students: students });
+    addStudent(student);
+    this.getFetchUsers();
   }
   render() {
     const {
