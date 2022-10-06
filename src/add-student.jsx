@@ -2,60 +2,110 @@ import React, { Component } from "react";
 import "./css/main.css";
 
 class AddStudent extends Component {
+  state = {
+    prenom: "",
+    nom: "",
+    sex: "",
+    adresse: "",
+    telephone: "",
+    montant: "",
+    niveau: "",
+  };
+  handleInput = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  };
+  saveStudent = async (e) => {
+    e.preventDefault();
+    const id = new Date().getTime();
+    const prenom = this.state.prenom;
+    const nom = this.state.nom;
+    const sex = this.state.sex;
+    const adresse = this.state.adresse;
+    const telephone = this.state.telephone;
+    const montant = this.state.montant;
+    const niveau = this.state.niveau;
+    this.props.AddStudent({
+      id,
+      prenom,
+      nom,
+      sex,
+      adresse,
+      telephone,
+      montant,
+      niveau,
+    });
+   
+  };
   render() {
     return (
       <div className="AddStudent">
-        <div class="page-wrapper">
-          <div class="wrapper wrapper--w790">
-            <div class="card card-5">
-              <div class="card-heading bg-info">
-                <h4 class="title">Ajouter Un Etudiant</h4>
+        <div className="page-wrapper">
+          <div className="wrapper wrapper--w790">
+            <div className="card card-5">
+              <div className="card-heading bg-info">
+                <h4 className="title">Ajouter Un Etudiant</h4>
               </div>
-              <div class="card-body">
-                <form method="POST">
-                  <div class="form-row">
-                    <div class="name">Prenom & Nom</div>
-                    <div class="value">
-                      <div class="row row-space">
-                        <div class="col-6">
-                          <div class="input-group-desc">
+              <div className="card-body">
+                <form onSubmit={this.saveStudent}>
+                  <div className="form-row">
+                    <div className="name">Prenom & Nom</div>
+                    <div className="value">
+                      <div className="row row-space">
+                        <div className="col-6">
+                          <div className="input-group-desc">
                             <input
-                              class="input--style-5"
+                              className="input--style-5"
                               type="text"
-                              name="first_name"
+                              name="prenom"
+                              onChange={this.handleInput}
+                              value={this.state.name}
                             />
-                            <label class="label--desc">Prénom(s)</label>
+                            <label className="label--desc">Prénom(s)</label>
                           </div>
                         </div>
-                        <div class="col-6">
-                          <div class="input-group-desc">
+                        <div className="col-6">
+                          <div className="input-group-desc">
                             <input
-                              class="input--style-5"
+                              className="input--style-5"
                               type="text"
-                              name="last_name"
+                              name="nom"
+                              onChange={this.handleInput}
+                              value={this.state.name}
                             />
-                            <label class="label--desc">Nom</label>
+                            <label className="label--desc">Nom</label>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="form-row">
-                    <div class="name">Genre</div>
-                    <div class="value">
-                      <div class="row row-refine">
-                        <div class="col-6">
-                          <div class="input-group-desc">
-                            <div class="p-t-5 ">
-                              <label class="radio-container m-r-55">
+                  <div className="form-row">
+                    <div className="name">Genre</div>
+                    <div className="value">
+                      <div className="row row-refine">
+                        <div className="col-6">
+                          <div className="input-group-desc">
+                            <div className="p-t-5 ">
+                              <label className="radio-container m-r-55">
                                 H
-                                <input type="radio" name="exist" />
-                                <span class="checkmark"></span>
+                                <input
+                                  type="radio"
+                                  name="sex"
+                                  onChange={this.handleInput}
+                                  value="H"
+                                />
+                                <span className="checkmark"></span>
                               </label>
-                              <label class="radio-container">
+                              <label className="radio-container">
                                 F
-                                <input type="radio" name="exist" />
-                                <span class="checkmark"></span>
+                                <input
+                                  type="radio"
+                                  name="sex"
+                                  onChange={this.handleInput}
+                                  value="F"
+                                />
+                                <span className="checkmark"></span>
                               </label>
                             </div>
                           </div>
@@ -63,28 +113,32 @@ class AddStudent extends Component {
                       </div>
                     </div>
                   </div>
-                  <div class="form-row">
-                    <div class="name">Adresse & Tél</div>
-                    <div class="value">
-                      <div class="row row-refine">
-                        <div class="col-6">
-                          <div class="input-group-desc">
+                  <div className="form-row">
+                    <div className="name">Adresse & Tél</div>
+                    <div className="value">
+                      <div className="row row-refine">
+                        <div className="col-6">
+                          <div className="input-group-desc">
                             <input
-                              class="input--style-5"
+                              className="input--style-5"
                               type="text"
-                              name="area_code"
+                              name="adresse"
+                              onChange={this.handleInput}
+                              value={this.state.name}
                             />
-                            <label class="label--desc">Adresse</label>
+                            <label className="label--desc">Adresse</label>
                           </div>
                         </div>
-                        <div class="col-6">
-                          <div class="input-group-desc">
+                        <div className="col-6">
+                          <div className="input-group-desc">
                             <input
-                              class="input--style-5"
+                              className="input--style-5"
                               type="text"
-                              name="phone"
+                              name="telephone"
+                              onChange={this.handleInput}
+                              value={this.state.name}
                             />
-                            <label class="label--desc">
+                            <label className="label--desc">
                               Numéro de téléphone
                             </label>
                           </div>
@@ -92,43 +146,52 @@ class AddStudent extends Component {
                       </div>
                     </div>
                   </div>
-                  <div class="form-row m-b-55">
-                    <div class="name">Niveau</div>
-                    <div class="value">
-                      <div class="row row-refine">
-                        <div class="col-6">
-                          <div class="input-group-desc">
-                            <select class="form-select input--style-5">
+                  <div className="form-row m-b-55">
+                    <div className="name">Niveau</div>
+                    <div className="value">
+                      <div className="row row-refine">
+                        <div className="col-6">
+                          <div className="input-group-desc">
+                            <select
+                              className="form-select input--style-5"
+                              name="niveau"
+                              onChange={this.handleInput}
+                              value={this.state.name}
+                            >
                               <option selected>Niveau</option>
-                              <option value="1">One</option>
-                              <option value="2">Two</option>
-                              <option value="3">Three</option>
+                              <option>licence 1</option>
+                              <option>licence 2</option>
+                              <option>licence 3</option>
+                              <option>Master 1</option>
+                              <option>Master 2</option>
                             </select>
 
-                            <label class="label--desc">
+                            <label className="label--desc">
                               Niveau universitaire
                             </label>
                           </div>
                         </div>
-                        <div class="col-6">
-                          <div class="input-group-desc">
+                        <div className="col-6">
+                          <div className="input-group-desc">
                             <input
-                              class="input--style-5"
+                              className="input--style-5"
                               type="number"
                               min={25000}
                               max={75000}
                               step={25000}
-                              name="phone"
+                              name="montant"
+                              onChange={this.handleInput}
+                              value={this.state.name}
                             />
-                            <label class="label--desc">Montant</label>
+                            <label className="label--desc">Montant</label>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  <div class="float-right">
-                    <button class="btn btn--radius-2 btn-info" type="submit">
+                  <div className="float-right">
+                    <button className="btn btn--radius-2 btn-info" type="submit">
                       Envoyer
                     </button>
                   </div>
