@@ -359,7 +359,7 @@ h6 {
 }
 
 .wrapper--w850 {
-  max-width: 850px;
+  max-width: 1200px;
 }
 
 .wrapper--w790 {
@@ -739,7 +739,7 @@ input {
 }
 
 .card-5 .card-heading {
-  padding: 5px 0;
+  padding: 15px 0;
   background: #1a1a1a;
 
 }

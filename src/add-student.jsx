@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import "./css/main.css";
+import { addStudent } from "./.env";
+
 
 class AddStudent extends Component {
   state = {
@@ -10,6 +12,7 @@ class AddStudent extends Component {
     telephone: "",
     montant: "",
     niveau: "",
+    students: [],
   };
   handleInput = (e) => {
     this.setState({
@@ -26,23 +29,14 @@ class AddStudent extends Component {
     const telephone = this.state.telephone;
     const montant = this.state.montant;
     const niveau = this.state.niveau;
-    this.props.AddStudent({
-      id,
-      prenom,
-      nom,
-      sex,
-      adresse,
-      telephone,
-      montant,
-      niveau,
-    });
-   
+    addStudent({ id, prenom, nom, sex, adresse, telephone, montant, niveau });
+    window.location.href='/'
   };
   render() {
     return (
       <div className="AddStudent">
         <div className="page-wrapper">
-          <div className="wrapper wrapper--w790">
+          <div className="wrapper wrapper--w850">
             <div className="card card-5">
               <div className="card-heading bg-info">
                 <h4 className="title">Ajouter Un Etudiant</h4>
@@ -191,7 +185,10 @@ class AddStudent extends Component {
                   </div>
 
                   <div className="float-right">
-                    <button className="btn btn--radius-2 btn-info" type="submit">
+                    <button
+                      className="btn btn--radius-2 btn-info"
+                      type="submit"
+                    >
                       Envoyer
                     </button>
                   </div>

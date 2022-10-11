@@ -1,84 +1,28 @@
 import './App.css';
-import React, { Component } from 'react';
+import Topbar from './navbar';
+import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import StudentList from './student-list';
+import EditStudent from './edit-student';
 import AddStudent from './add-student';
-import { environment , deleteUser, addStudent} from './.env';
+import StudentManagement from './Students-management';
+import Interface2 from './Interface2';
 
 
-
-class App extends Component {
-  state = {
-    isLoading: true,
-    students: [],
-    error: null
-  };
-  getFetchUsers() {
-    this.setState({
-      loading: true
-    }, () => {
-      fetch(environment.BaseUrl).then(res => res.json()).then(result => this.setState({
-        loading: false,
-        students: result
-      })).catch(console.log);
-    });
-  }
-   deleteData(id){
-     deleteUser(id);
-     this.getFetchUsers();
+function App() {
+  return (
+    <Router>
+      <Topbar />
+      <Routes>
+        <Route path="/interface2" element={<Interface2 />} exact />
+        <Route path="/" element={<StudentManagement />} exact>
+          <Route path="/" element={<StudentList />} exact />
+          <Route path="/add-student" element={<AddStudent />} exact />
+          <Route path="/edit/:id" element={<EditStudent />} exact />
+        </Route>
+        <Route path="/" element={<StudentList />} exact />
+      </Routes>
+    </Router >
+  );
 }
 
-  componentDidMount() {
-    this.getFetchUsers();
-   
-  }
-
-  handleAdd = student => {
-    addStudent(student);
-    this.getFetchUsers();
-  }
-  render() {
-    const {
-      students,
-
-    } = this.state;
-    return (
-      <div className="App">
-        <div className="p-4">
-          <div className="row">
-            <div className="col-md-6">
-              <table className="table shadow">
-                <thead className="bg-info">
-                  <tr>
-                    <th>prenom & Nom</th>
-                    <th>Sex</th>
-                    <th>Télphone</th>
-                    <th>Niveau</th>
-                    <th>Montant</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {students.map(student => (
-                    <tr>
-                      <td>{student.prenom} {student.nom}</td>
-                      <td>{student.sex}</td>
-                      <td>{student.telephone}</td>
-                      <td>{student.niveau}</td>
-                      <td>{student.montant}</td>
-                      <td><i className="fa-solid fa-pen text-success"></i>
-                        <i className="fa-solid fa-trash text-danger m-3" onClick={() =>  this.deleteData(student.id)}></i></td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <div className="col-md-6">
-              <AddStudent AddStudent={this.handleAdd} />
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-}
 export default App;
